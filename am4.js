@@ -11,8 +11,8 @@
 // noinspection JSUnresolvedFunction
 
 // Set the price thresholds under which we buy fuel and CO2
-let fuelPriceThreshold = 550;
-let co2PriceThreshold = 125;
+let fuelPriceThreshold = 380;
+let co2PriceThreshold = 140;
 var autoDepartTimeoutID;
 var autoBuyerTimeoutID;
 
@@ -52,6 +52,9 @@ function toggleAutoBuyer() {
     }
 }
 
+
+
+
 // Auto-depart
 function autoDepartRoutine() {
     // Trying to avoid detection
@@ -74,9 +77,10 @@ function departAll() {
         // slight delay to give time for eco-friendly campaign to start
         setTimeout(function () {
             const departButton = numberSpan.parentElement;
-            if (departButton) {
-                departButton.click();
-            }
+            var buttonforlanded = document.getElementById("flightStatusLanded");
+            buttonforlanded.click();
+            console.log("clicked button landed")
+            departButton.click();
         }, 1000);
     }
 }
@@ -206,7 +210,7 @@ function scanConsumable() {
 
             // Wait 30 mins before scanning again
             const time = 30 * 60 * 1000;
-            autoBuyerTimeoutID = setTimeout(scanConsumable, time)
+            autoBuyerTimeoutID = setTimeout(scanConsumable, 180000)
         }, 500);
 
     }, 2000);
@@ -240,6 +244,5 @@ function call(url) {
     xhr.open('GET', url, true);
     xhr.send();
 }
-
 
 
